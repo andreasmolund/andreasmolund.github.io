@@ -58,13 +58,9 @@ export default {
           attributeNamePrefix: '',
         })  
 
-        console.log('Response fra Kartverket: ' + response.data)
-        
         const result = parser.parse(response.data)
         
         const allWaterlevels = result.tide.locationdata.data.waterlevel
-
-        console.log('allWaterlevels ', allWaterlevels)
 
         var waterlevelsPerDay = []
         let waterlevelsCurrentDay = []
@@ -74,8 +70,7 @@ export default {
         for (i = 0; i < allWaterlevels.length; i++) {
 
           const waterLevel = allWaterlevels[i]
-          console.log('waterLevel', waterLevel)
-          console.log('waterLevel.time', waterLevel.time)
+
           currentDay = format(new Date(waterLevel.time), "yyyy-MM-dd")
           
           if (i == 0) {
@@ -98,7 +93,6 @@ export default {
         // self.waterlevels = waterlevelsPerDay
         this.waterlevels = waterlevelsPerDay
         
-        console.log('waterlevelsPerDay', waterlevelsPerDay)
       } catch (error) {
         console.error('Error fetching or parsing XML:', error)
       }

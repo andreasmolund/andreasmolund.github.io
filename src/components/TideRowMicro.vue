@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     formatDate(strDate) {
-      console.log('Formatting date', strDate)
       return format(new Date(strDate), "EEEEEE do MMMM", {locale: nb})
     },
     formatTime(strDate) {

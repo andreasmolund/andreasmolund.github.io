@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted() {
-    console.log("TideRow mounted. Data for dag:", this.waterlevel)
+    // console.log("TideRow mounted. Data for dag:", this.waterlevel)
   }
 }
 </script>

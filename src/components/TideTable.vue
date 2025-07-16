@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    console.log("TideTable mounted. Data for dag:", this.waterlevel)
+    // console.log("TideTable mounted. Data for dag:", this.waterlevel)
   }
 }
 </script>
