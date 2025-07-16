@@ -9,7 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.17"
+    "axios": "^1.x",
+    "bootstrap": "^5.x",
+    "date-fns": "^4.x",
+    "vue": "^3.x",
+    "xml2js": "^0.6.x"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
