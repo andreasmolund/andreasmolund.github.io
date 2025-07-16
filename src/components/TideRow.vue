@@ -1,6 +1,6 @@
 <template>
   <TideRowMicro
-      v-for="waterlevelInstance, index in extractLevels(waterlevel)" 
+      v-for="(waterlevelInstance, index) in extractLevels(waterlevel)" 
       :key="index" 
       :waterlevelInstance="waterlevelInstance"
       :classstyle="getColor(dayindex)" />  
@@ -34,7 +34,7 @@ export default {
     }
   },
   mounted() {
-    console.log("Data for dag:", this.waterlevel)
+    console.log("TideRow mounted. Data for dag:", this.waterlevel)
   }
 }
 </script>

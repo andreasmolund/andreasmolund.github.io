@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col"> 
-        <h1 class="display-1">Hamnvik kool</h1>
+        <h1 class="display-1">Hamnvik</h1>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <TideRow v-for="waterlevel, index in waterlevels" :key="index" :waterlevel="waterlevel" :dayindex="index" />
+            <TideRow v-for="(waterlevel, index) in waterlevels" :key="index" :waterlevel="waterlevel" :dayindex="index" />
           </tbody>
         </table>
       </div>
@@ -25,7 +25,7 @@
     
     <div class="row">
       <div class="col"> 
-        <p><small>Data hentet fra sehavniva.no</small></p>
+        <p><small>Data hentet fra &copy; Kartverket</small> sine APIer. Se også <a href="https://kartverket.no/api-og-data/vilkar-for-bruk">Vilkår for bruk</a></p>
       </div>
     </div>
   </div>
@@ -46,6 +46,9 @@ export default {
       required: true,
     }
   },
+  mounted() {
+    console.log("TideTable mounted. Data for dag:", this.waterlevel)
+  }
 }
 </script>
 

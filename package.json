@@ -12,6 +12,7 @@
     "axios": "^1.x",
     "bootstrap": "^5.x",
     "date-fns": "^4.x",
+    "fast-xml-parser": "^5.2.5",
     "vue": "^3.x",
     "xml2js": "^0.6.x"
   },

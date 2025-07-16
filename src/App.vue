@@ -7,8 +7,10 @@
 import TideTable from './components/TideTable.vue'
 import axios from "axios"
 import { addDays, format, addMinutes, parseISO } from "date-fns"
-var parseString = require('xml2js').parseString;
+import { XMLParser } from 'fast-xml-parser'
+import { ref } from 'vue'
 
+//const waterlevels = ref({})
 
 export default {
   name: 'App',
@@ -46,44 +48,61 @@ export default {
     async fetchWaterlevels() {
       let from = this.getFrom()
       let to = this.getTo()
-      let url = 'https://api.sehavniva.no/tideapi.php?tide_request=locationdata&lat=68.7782192&lon=17.1796206&datatype=TAB&lang=nb&place=Har&dst=1&fromtime=' + from + '&totime=' + to + '&interval=10&flag=high'
-      axios
-        .get(url)
-        .then(response => {
-          var self = this;
-          var allWaterlevels = []
-          parseString(response.data, {explicitArray: false} , function (err, result) {
-            allWaterlevels = result.tide.locationdata.data.waterlevel
-          })
+      let url = 'https://vannstand.kartverket.no/tideapi.php?tide_request=locationdata&lat=68.7782192&lon=17.1796206&datatype=TAB&lang=nb&place=Har&dst=1&fromtime=' + from + '&totime=' + to + '&interval=10&flag=high'
 
-          var waterlevelsPerDay = []
-          let waterlevelsCurrentDay = []
-          var lastDay = "1970-01-01"
-          var currentDay = "1970-01-01"
-          var i;
-          for (i = 0; i < allWaterlevels.length; i++) {
+      try {
+        const response = await axios.get(url)
 
-            currentDay = format(new Date(allWaterlevels[i]["$"].time), "yyyy-MM-dd")
-            
-            if (i == 0) {
-              lastDay = currentDay
-            }
+        const parser = new XMLParser({
+          ignoreAttributes: false,
+          attributeNamePrefix: '',
+        })  
 
-            if (currentDay === lastDay) {
-              waterlevelsCurrentDay.push(allWaterlevels[i])
-            } else {
-              waterlevelsPerDay.push({day: lastDay, levels: waterlevelsCurrentDay})
-              waterlevelsCurrentDay = []
-              waterlevelsCurrentDay.push(allWaterlevels[i])
-              lastDay = currentDay
-            }
+        console.log('Response fra Kartverket: ' + response.data)
+        
+        const result = parser.parse(response.data)
+        
+        const allWaterlevels = result.tide.locationdata.data.waterlevel
 
+        console.log('allWaterlevels ', allWaterlevels)
+
+        var waterlevelsPerDay = []
+        let waterlevelsCurrentDay = []
+        var lastDay = "1970-01-01"
+        var currentDay = "1970-01-01"
+        var i;
+        for (i = 0; i < allWaterlevels.length; i++) {
+
+          const waterLevel = allWaterlevels[i]
+          console.log('waterLevel', waterLevel)
+          console.log('waterLevel.time', waterLevel.time)
+          currentDay = format(new Date(waterLevel.time), "yyyy-MM-dd")
+          
+          if (i == 0) {
+            lastDay = currentDay
           }
 
-          waterlevelsPerDay.push({day: currentDay, levels: waterlevelsCurrentDay})
+          if (currentDay === lastDay) {
+            waterlevelsCurrentDay.push(waterLevel)
+          } else {
+            waterlevelsPerDay.push({day: lastDay, levels: waterlevelsCurrentDay})
+            waterlevelsCurrentDay = []
+            waterlevelsCurrentDay.push(waterLevel)
+            lastDay = currentDay
+          }
 
-          self.waterlevels = waterlevelsPerDay
-        })
+        }
+
+        waterlevelsPerDay.push({day: currentDay, levels: waterlevelsCurrentDay})
+
+        // self.waterlevels = waterlevelsPerDay
+        this.waterlevels = waterlevelsPerDay
+        
+        console.log('waterlevelsPerDay', waterlevelsPerDay)
+      } catch (error) {
+        console.error('Error fetching or parsing XML:', error)
+      }
+        
     }
   },
   mounted() {
