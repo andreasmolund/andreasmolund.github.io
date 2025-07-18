@@ -1,19 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Vorren from '../pages/Vorren.vue'
-import TopoSort from '../pages/TopoSort.vue'
-import ElCalc from '../pages/ElCalc.vue'
-import F1 from '../pages/F1.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', name: 'Vorren', component: Vorren },
-  { path: '/toposort', name: 'Topo-sort', component: TopoSort },
-  { path: '/elcalc', name: 'El-calc', component: ElCalc },
-  { path: '/f1', name: 'F1', component: F1 },
+  { path: '/', name: 'Vorren', component: () => import('../pages/Vorren.vue') },
+  { path: '/toposort', name: 'Topo-sort', component: () => import('../pages/TopoSort.vue') },
+  { path: '/elcalc', name: 'El-calc', component: () => import('../pages/ElCalc.vue')  },
+  { path: '/f1', name: 'F1', component: () => import('../pages/F1.vue') },
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHashHistory(),
+  routes
 })
 
 export default router
