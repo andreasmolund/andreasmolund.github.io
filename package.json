@@ -10,8 +10,9 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.x",
-    "bootstrap": "^5.x",
+    "bootstrap": "^5.3.7",
     "date-fns": "^4.x",
     "fast-xml-parser": "^5.2.5",
     "vue": "^3.x",
