@@ -1,0 +1,1 @@
+import{_ as r}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{c as t,b as o,o as l}from"./index-B9T2Aqqe.js";const a={};function c(n,e){return l(),t("div",null,e[0]||(e[0]=[o("h1",null,"Arc flash calculator",-1),o("p",null,"Legg to og to sammen",-1)]))}const m=r(a,[["render",c]]);export{m as default};
