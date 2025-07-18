@@ -1,0 +1,1 @@
+import{_ as r}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{c as n,b as o,o as t}from"./index-B9T2Aqqe.js";const s={};function c(l,e){return t(),n("div",null,e[0]||(e[0]=[o("h1",null,"F1 schedule",-1),o("p",null,"vroom vroom",-1)]))}const f=r(s,[["render",c]]);export{f as default};
