@@ -25,7 +25,11 @@
     
     <div class="row">
       <div class="col"> 
-        <p><small>Data hentet fra &copy; Kartverket</small> sine APIer. Se også <a href="https://kartverket.no/api-og-data/vilkar-for-bruk">Vilkår for bruk</a></p>
+        <p>
+          <small>
+            Data hentet fra &copy; Kartverket sine APIer. Se også <a href="https://kartverket.no/api-og-data/vilkar-for-bruk">Vilkår for bruk</a>
+          </small>
+        </p>
       </div>
     </div>
   </div>
